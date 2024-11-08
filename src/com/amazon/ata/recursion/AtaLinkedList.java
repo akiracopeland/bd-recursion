@@ -102,9 +102,18 @@ public class AtaLinkedList {
      * @return The sum of all elements in the list
      */
     public Double sum() {
-        // PARTICIPANTS: calculate the sum of this AtaLinkedList
 
-        throw new UnsupportedOperationException();
+        return sumRecursive(this.head);
+
+    }
+
+    private Double sumRecursive(AtaNode ataNode) {
+
+        if (ataNode == null) {
+            return 0.0;
+        }
+
+        return ataNode.getData() + sumRecursive(ataNode.getNext());
     }
 
     /**
@@ -113,9 +122,23 @@ public class AtaLinkedList {
      * @return a new reverse order list
      */
     public AtaLinkedList reverse() {
-        // PARTICIPANTS: create the reversed AtaLinkedList
 
-        throw new UnsupportedOperationException();
+
+        return reverseRecursive(this.head);
+
+    }
+
+    private AtaLinkedList reverseRecursive(AtaNode ataNode) {
+
+        if (ataNode == null) {
+            return new AtaLinkedList();
+        }
+
+        AtaLinkedList reversedList = reverseRecursive(ataNode.getNext());
+
+        reversedList.addLast(ataNode.getData());
+
+        return reversedList;
     }
 
     // EXTENSION
@@ -125,7 +148,16 @@ public class AtaLinkedList {
      * @return size of the linked list
      */
     public int size() {
-        throw new UnsupportedOperationException();
+
+        return sizeRecursive(this.head);
+    }
+
+    private int sizeRecursive(AtaNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return 1 + sizeRecursive(node.getNext());
     }
 
     // EXTENSION
@@ -136,7 +168,22 @@ public class AtaLinkedList {
      * @return true, if the list contains the number.
      */
     public boolean contains(Double number) {
-        throw new UnsupportedOperationException();
+
+        return containsRecursive(this.head, number);
+
+    }
+
+    private boolean containsRecursive(AtaNode node, Double number) {
+
+        if (node == null) {
+            return false;
+        }
+
+        if (node.getData().equals(number)) {
+            return true;
+        }
+
+        return containsRecursive(node.getNext(), number);
     }
 
     // EXTENSION
@@ -145,7 +192,26 @@ public class AtaLinkedList {
      * @return The max double in the list.
      */
     public Double max() {
-        throw new UnsupportedOperationException();
+
+        if (this.head == null) {
+            return null;
+        }
+
+        return maxRecursive(this.head, this.head.getData());
+    }
+
+    private Double maxRecursive(AtaNode node, Double max) {
+
+        if (node == null) {
+            return max;
+        }
+
+        if (max < node.getData()) {
+            max = node.getData();
+        }
+
+        return maxRecursive(node.getNext(), max);
+
     }
 
     // EXTENSION
